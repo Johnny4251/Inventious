@@ -3,6 +3,8 @@ import tensorflow as tf
 import cv2
 import numpy as np
 import matplotlib
+from PyQt5.QtCore import QT_VERSION_STR, PYQT_VERSION_STR
+
 
 python_version = sys.version
 
@@ -17,4 +19,6 @@ print("TensorFlow Version:", tf_version)
 print("OpenCV version:", cv_version)
 print("Numpy Version:", np_version)
 print("Matplotlib Version:", matplotlib_version)
+print("PyQt:", PYQT_VERSION_STR)
+print("Qt:", QT_VERSION_STR)
 print("==============")
