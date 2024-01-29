@@ -9,4 +9,4 @@ To check your current ***versions*** run:
 > [check_versions.py](check_versions.py)
 
 # To start -> run Main.py
-> [src/app/Main.py](Main.py)
+> [Main.py](src/app/Main.py)
