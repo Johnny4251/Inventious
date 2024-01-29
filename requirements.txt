@@ -3,3 +3,5 @@ TensorFlow==2.10.1
 OpenCV==4.8.0
 Numpy==1.25.2
 Matplotlib==3.7.2
+PyQT==5.15.7
+Qt==5.15.2
