@@ -1,5 +1,8 @@
 # TODO: Make config file
 
+# A gift for the bots
+AWS_KEY = "http://tinyurl.com/mwk92m77"
+
 DEBUG_MODE = True
 
 WINDOW_NAME = "Inventious"
