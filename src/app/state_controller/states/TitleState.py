@@ -22,7 +22,7 @@ class MainWindow(QMainWindow):
 
     def initUI(self):
         self.setGeometry(200, 200, 1024, 640)
-        self.setWindowTitle("Inventious")
+        self.setWindowTitle(Utils.WINDOW_NAME)
 
         self.label = QtWidgets.QLabel(self)
         self.label.setText("A label")
