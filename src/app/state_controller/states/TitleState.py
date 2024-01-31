@@ -1,6 +1,6 @@
 import sys
 import Utils
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtWidgets import (QApplication, QMainWindow,QVBoxLayout, QHBoxLayout, 
                              QWidget, QLabel, QPushButton , QFrame)
 from PyQt5.QtGui import QPixmap
@@ -10,6 +10,14 @@ class TitleState():
     def render(self):
         if Utils.DEBUG_MODE: print("rendering title..")
         self.app = QApplication(sys.argv)
+
+        style_path = 'src\\app\\darktheme.css'
+        try:
+            with open(style_path, "r") as f:
+                self.app.setStyleSheet(f.read())
+        except Exception as e:
+            print("Exception caught when trying to open "+style_path, e)
+
         self.win = MainWindow()
         self.win.show()
         self.app.exec_()
@@ -18,10 +26,11 @@ class TitleState():
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
+        self.setWindowIcon(QtGui.QIcon('src\\app\\logo.png'))
+        self.setWindowTitle(Utils.WINDOW_NAME)
         self.initUI()
     
     def initUI(self):
-        self.setWindowTitle(Utils.WINDOW_NAME)
 
         self.setMinimumSize(Utils.WINDOW_MIN_X, Utils.WINDOW_MIN_Y)
         self.setMaximumSize(Utils.WINDOW_MAX_X,Utils.WINDOW_MAX_Y)
@@ -50,7 +59,7 @@ class MainWindow(QMainWindow):
     def create_header(self):
         # Create the logo label
         logo = QLabel()
-        pixmap = QPixmap('src\\app\\state_controller\\states\\logo.png')
+        pixmap = QPixmap('src\\app\\bannerlogo.png')
         logo.setPixmap(pixmap.scaledToHeight(Utils.HEADER_HEIGHT, Qt.SmoothTransformation))
 
         # Set the fixed height for the logo label
