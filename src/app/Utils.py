@@ -15,3 +15,6 @@ WINDOW_MIN_Y = 480
 
 HEADER_HEIGHT = 100
 LEFT_PANEL_WIDTH = 175
+
+train_dir_loc = ""
+test_dir_loc  = ""

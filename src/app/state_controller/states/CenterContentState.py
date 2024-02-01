@@ -1,4 +1,5 @@
 from app.state_controller.Events import Event
+import Utils
 from PyQt5.QtWidgets import (QApplication, QMainWindow,QVBoxLayout, QHBoxLayout, 
                              QWidget, QLabel, QPushButton , QFrame, QFileDialog)
 
@@ -17,20 +18,20 @@ class CenterContentState:
         layout = QVBoxLayout(widget)
 
         # Create labels
-        train_dir_label = QLabel("Training Directory:")
-        test_dir_label = QLabel("Testing Directory:")
+        self.train_dir_label = QLabel("Training Directory: " + Utils.train_dir_loc)
+        self.test_dir_label = QLabel("Testing Directory: " + Utils.test_dir_loc)
 
         # Create buttons and connect them to methods for opening file dialog
         train_dir_btn = QPushButton("Select Training Directory")
-        train_dir_btn.clicked.connect(lambda: self.open_file_dialog(train_dir_label))
+        train_dir_btn.clicked.connect(lambda: self.open_file_dialog(self.train_dir_label))
 
         test_dir_btn = QPushButton("Select Testing Directory")
-        test_dir_btn.clicked.connect(lambda: self.open_file_dialog(test_dir_label))
+        test_dir_btn.clicked.connect(lambda: self.open_file_dialog(self.test_dir_label))
 
         # Add widgets to the layout
-        layout.addWidget(train_dir_label)
+        layout.addWidget(self.train_dir_label)
         layout.addWidget(train_dir_btn)
-        layout.addWidget(test_dir_label)
+        layout.addWidget(self.test_dir_label)
         layout.addWidget(test_dir_btn)
 
         return widget
@@ -40,7 +41,12 @@ class CenterContentState:
         directory = QFileDialog.getExistingDirectory(None, "Select Directory")
         if directory:  # Update label text if a directory was selected
             label.setText(f"Selected Directory: {directory}")
-    
+
+        if label == self.test_dir_label:
+            Utils.test_dir_loc = directory
+        elif label == self.train_dir_label:
+            Utils.train_dir_loc = directory
+
     def get_content(self, event):
 
         match event:

@@ -7,6 +7,7 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
 
 from app.state_controller.Events import Event
+import Utils
 from app.state_controller.states.CenterContentState import CenterContentState
 
 
@@ -81,7 +82,7 @@ class MainWindow(QMainWindow):
         create_dset_btn.clicked.connect(self.create_dataset_pressed)
 
         create_transform_btn = QPushButton("Create Transform")
-        select_model_btn = QPushButton("Create Transform")
+        select_model_btn = QPushButton("Select Model")
         train_model_btn = QPushButton("Train Model")
 
         panel_btns = [create_dset_btn, create_transform_btn, 
