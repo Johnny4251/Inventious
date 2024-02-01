@@ -23,25 +23,30 @@ class MainWindow(QMainWindow):
         self.setMaximumSize(Utils.WINDOW_MAX_X,Utils.WINDOW_MAX_Y)
         self.resize(Utils.WINDOW_MAX_X,Utils.WINDOW_MAX_Y)
 
-        main_widget = QWidget()
-        self.setCentralWidget(main_widget)
+        self.main_widget = QWidget()
+        self.setCentralWidget(self.main_widget)
 
-        main_layout = QVBoxLayout(main_widget)
+        self.main_layout = QVBoxLayout(self.main_widget)
 
         header = self.create_header()
-        main_layout.addWidget(header)
+        self.main_layout.addWidget(header)
         
-        lower_layout = QHBoxLayout()
+        self.lower_layout = QHBoxLayout()
 
         left_panel = self.create_left_panel()
-        lower_layout.addWidget(left_panel)
+        self.lower_layout.addWidget(left_panel)
 
-        center_content = CenterContentState().get_content(Event.TITLE)
-        lower_layout.addWidget(center_content)
+        self.center_content = CenterContentState().get_content(Event.TITLE)
+        self.lower_layout.addWidget(self.center_content)
 
-        main_layout.addLayout(lower_layout)
+        self.main_layout.addLayout(self.lower_layout)
 
-    
+    def create_dataset(self):
+        old_content = self.center_content
+        self.center_content = CenterContentState().get_content(Event.CREATE_DATASET)
+        self.lower_layout.replaceWidget(old_content, self.center_content)
+        if Utils.DEBUG_MODE: print("create dataset button pressed")
+
     def create_header(self):
         # Create the logo label
         logo = QLabel()
@@ -59,6 +64,8 @@ class MainWindow(QMainWindow):
         panel_layout = QVBoxLayout(panel)
 
         create_dset_btn = QPushButton("Create Dataset")
+        create_dset_btn.clicked.connect(self.create_dataset)
+
         create_transform_btn = QPushButton("Create Transform")
         select_model_btn = QPushButton("Create Transform")
         train_model_btn = QPushButton("Train Model")
