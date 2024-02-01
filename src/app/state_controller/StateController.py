@@ -10,12 +10,14 @@ class StateController:
     def transition(self, event):
         if Utils.DEBUG_MODE: print("Transitioning to ", event)
 
+        # Handle State event accordingly
         if event == Event.TITLE: self.__req_title()
         elif event == Event.EXIT:self.__exit()
         else: raise ValueError("Invalid Event:" + str(event))
 
         if Utils.DEBUG_MODE: print("Transitioned to ", event)
 
+    # Typically called on startup
     def __req_title(self):
         title_state = TitleState()
         title_state.render()
