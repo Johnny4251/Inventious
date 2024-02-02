@@ -22,5 +22,5 @@ test_dir_loc  = ""
 horizontal_flip_state = False
 vertical_flip_state = False
 rotation_degree = 0
-shuffle_state = False
+shuffle = False
 random_crop_percentage = 0

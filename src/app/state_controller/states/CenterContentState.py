@@ -3,26 +3,44 @@ import Utils
 from PyQt5.QtWidgets import (QApplication, QMainWindow,QVBoxLayout, QHBoxLayout, 
                              QWidget, QLabel, QPushButton , QFrame, QFileDialog, QSpinBox,
                              QCheckBox)
-from tensorflow.keras.layers.experimental import preprocessing
+import torchvision.transforms as transforms
 
 class CenterContentState:
+    def __init__(self):
+        pass
 
-    def __content_title(self):
-        main_content = QLabel("Select an action from the left side panel")
-        main_content.setFrameStyle(QFrame.Panel | QFrame.Sunken)
-        
-        return main_content
-    
     def __content_transform_creation(self):
+
+        def create_transformation_object(self):
+            transform_list = []
+            
+            if self.horizontal_flip_checkbox.isChecked():
+                transform_list.append(transforms.RandomHorizontalFlip(p=0.5))
+
+            if self.vertical_flip_checkbox.isChecked():
+                transform_list.append(transforms.RandomVerticalFlip(p=0.5))
+
+            if self.shuffle_checkbox.isChecked():
+                Utils.shuffle = True
+
+            rotation_degrees = self.rotation_spinbox.value()
+            if rotation_degrees > 0:  
+                transform_list.append(transforms.RandomRotation(degrees=(rotation_degrees, rotation_degrees)))
+
+            data_augmentation_transforms = transforms.Compose(transform_list)
+
+            Utils.data_augmentation_transforms = data_augmentation_transforms
+            if Utils.DEBUG_MODE: print(data_augmentation_transforms)
+
         widget = QWidget()
         layout = QVBoxLayout(widget)
 
-        self.horizontal_flip_label = QLabel("Horizontal Flip: ")
+        self.horizontal_flip_label = QLabel("Random Horizontal Flip: ")
         self.horizontal_flip_checkbox = QCheckBox()
         layout.addWidget(self.horizontal_flip_label)
         layout.addWidget(self.horizontal_flip_checkbox)
 
-        self.vertical_flip_label = QLabel("Vertical Flip: ")
+        self.vertical_flip_label = QLabel("Random Vertical Flip: ")
         self.vertical_flip_checkbox = QCheckBox()
         layout.addWidget(self.vertical_flip_label)
         layout.addWidget(self.vertical_flip_checkbox)
@@ -47,17 +65,22 @@ class CenterContentState:
         layout.addWidget(self.random_crop_spinbox)
 
         self.confirm_btn = QPushButton("Confirm Transformation")
-        self.confirm_btn.clicked.connect(self.create_transformation_object)
+        self.confirm_btn.clicked.connect(lambda: create_transformation_object(self))
         layout.addWidget(self.confirm_btn)
 
         return widget
 
-    def create_transformation_object(self):
-        Utils.data_augmentation_layers = [
-            preprocessing.RandomFlip("horizontal" if self.horizontal_flip_checkbox.isChecked() else "none"),
-            preprocessing.RandomFlip("vertical" if self.vertical_flip_checkbox.isChecked() else "none"),
-            preprocessing.RandomRotation(self.rotation_spinbox.value() / 360.0),
-        ]
+    def __content_title(self):
+        main_content = QLabel("Select an action from the left side panel")
+        main_content.setFrameStyle(QFrame.Panel | QFrame.Sunken)
+        
+        return main_content
+    
+    
+
+    
+
+    
 
     def __content_dataset_creation(self):
         # Create the main widget and layout for this content

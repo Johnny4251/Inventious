@@ -46,7 +46,8 @@ class MainWindow(QMainWindow):
         self.lower_layout.addWidget(left_panel)
 
         # Center content is handeld & returned by the CenterContentState class
-        self.center_content = CenterContentState().get_content(Event.TITLE)
+        center_content = CenterContentState()
+        self.center_content = center_content.get_content(Event.TITLE)
         self.lower_layout.addWidget(self.center_content)
 
         self.main_layout.addLayout(self.lower_layout)
@@ -57,7 +58,8 @@ class MainWindow(QMainWindow):
         old_content.setParent(None)
 
         # Create and display the new dataset creation content
-        self.center_content = CenterContentState().get_content(Event.CREATE_DATASET)
+        center_content = CenterContentState()
+        self.center_content = center_content.get_content(Event.CREATE_DATASET)
         self.lower_layout.addWidget(self.center_content)
         if Utils.DEBUG_MODE:
             print("create dataset button pressed")
@@ -65,7 +67,7 @@ class MainWindow(QMainWindow):
     def create_header(self):
         # Create the logo label
         logo = QLabel()
-        pixmap = QPixmap('app\\bannerlogo.png')
+        pixmap = QPixmap('bannerlogo.png')
         logo.setPixmap(pixmap.scaledToHeight(Utils.HEADER_HEIGHT, Qt.SmoothTransformation))
 
         # Set the fixed height for the logo label
