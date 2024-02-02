@@ -1,14 +1,17 @@
 QWidget {
     background-color: #2D2D2D;
     color: #CCCCCC;
+    font-size: 16pt;
+    font-family: Arial, sans-serif;
 }
 
 QPushButton {
     background-color: #505050;
     color: white;
-    border: 1px solid #1D1D1D;
-    padding: 5px;
-    border-radius: 5px;
+    border: 2px solid #1D1D1D;
+    padding: 10px; 
+    border-radius: 8px;
+    font-weight: bold;
 }
 
 QPushButton:hover {
@@ -17,14 +20,17 @@ QPushButton:hover {
 
 QPushButton:pressed {
     background-color: #3E3E3E;
+    border-style: inset;
 }
 
 QLabel {
     color: #CCCCCC;
+    font-weight: normal;
 }
 
 QFrame {
-    border: 1px solid #3A3A3A;
+    border: 2px solid #3A3A3A;
+    padding: 5px;
 }
 
 QMainWindow {
@@ -32,7 +38,7 @@ QMainWindow {
 }
 
 QScrollBar:vertical {
-    border: 1px solid #2A2929;
+    border: 2px solid #2A2929;
     background: #2D2D2D;
     width: 15px;
     margin: 15px 0 15px 0;
@@ -44,7 +50,7 @@ QScrollBar::handle:vertical {
 }
 
 QScrollBar::add-line:vertical {
-    border: 1px solid #2A2929;
+    border: 2px solid #2A2929;
     background: #3E3E3E;
     height: 15px;
     subcontrol-position: bottom;
@@ -52,7 +58,7 @@ QScrollBar::add-line:vertical {
 }
 
 QScrollBar::sub-line:vertical {
-    border: 1px solid #2A2929;
+    border: 2px solid #2A2929;
     background: #3E3E3E;
     height: 15px;
     subcontrol-position: top;
@@ -60,7 +66,7 @@ QScrollBar::sub-line:vertical {
 }
 
 QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
-    border: 1px solid #3A3A3A;
+    border: 2px solid #3A3A3A;
     width: 3px;
     height: 3px;
     background: #CCCCCC;

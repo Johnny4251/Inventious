@@ -18,3 +18,9 @@ LEFT_PANEL_WIDTH = 175
 
 train_dir_loc = ""
 test_dir_loc  = ""
+
+horizontal_flip_state = False
+vertical_flip_state = False
+rotation_degree = 0
+shuffle_state = False
+random_crop_percentage = 0

@@ -13,7 +13,7 @@ class TitleState():
         if Utils.DEBUG_MODE: print("rendering title..")
         self.app = QApplication(sys.argv)
 
-        style_path = 'src\\app\\darktheme.css'
+        style_path = 'app\\darktheme.css'
         try:
             with open(style_path, "r") as f:
                 self.app.setStyleSheet(f.read())

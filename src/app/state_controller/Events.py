@@ -8,3 +8,4 @@ class Event(Enum):
     LEAVE_BOARD = 5
     EXIT = 6
     TITLE = 7
+    CREATE_TRANSFORM = 8

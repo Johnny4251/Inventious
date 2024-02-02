@@ -65,7 +65,7 @@ class MainWindow(QMainWindow):
     def create_header(self):
         # Create the logo label
         logo = QLabel()
-        pixmap = QPixmap('src\\app\\bannerlogo.png')
+        pixmap = QPixmap('app\\bannerlogo.png')
         logo.setPixmap(pixmap.scaledToHeight(Utils.HEADER_HEIGHT, Qt.SmoothTransformation))
 
         # Set the fixed height for the logo label
@@ -73,20 +73,29 @@ class MainWindow(QMainWindow):
 
         return logo
 
+    def create_transform_pressed(self):
+        # Similar to create_dataset_pressed, but for transformation
+        old_content = self.center_content
+        old_content.setParent(None)
+        self.center_content = CenterContentState().get_content(Event.CREATE_TRANSFORM)
+        self.lower_layout.addWidget(self.center_content)
+
     def create_left_panel(self):
         panel = QWidget()
         panel.setFixedWidth(Utils.LEFT_PANEL_WIDTH)
         panel_layout = QVBoxLayout(panel)
 
-        create_dset_btn = QPushButton("Create Dataset")
+        create_dset_btn = QPushButton("Dataset")
         create_dset_btn.clicked.connect(self.create_dataset_pressed)
 
-        create_transform_btn = QPushButton("Create Transform")
-        select_model_btn = QPushButton("Select Model")
-        train_model_btn = QPushButton("Train Model")
+        create_transform_btn = QPushButton("Transform")
+        create_transform_btn.clicked.connect(self.create_transform_pressed)
+
+        select_model_btn = QPushButton("Model")
+        train_model_btn = QPushButton("Train")
 
         panel_btns = [create_dset_btn, create_transform_btn, 
-                   select_model_btn, train_model_btn]
+                select_model_btn, train_model_btn]
         for btn in panel_btns:
             panel_layout.addWidget(btn)
 
